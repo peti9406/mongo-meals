@@ -1,6 +1,7 @@
 import InputField from "./InputField";
 import { updateMeal } from "../../utils/mealCRUDMethods";
 import { useEffect, useState } from "react";
+import SelectDropDown from "./SelectDropDown";
 
 export default function MyRecipeEditor({ recipe, onPage, handleCancel }) {
     const [meal, setMeal] = useState({ _id: recipe._id });
@@ -8,6 +9,7 @@ export default function MyRecipeEditor({ recipe, onPage, handleCancel }) {
     const [ingredientInputs, setIngredientInputs] = useState([]);
 
     useEffect(() => {
+        setMeal(recipe);
         function getIngredientInputs() {
             return Object.keys(recipe).filter(
                 (key) => key.includes("strIngredient") || key.includes("strMeasure")
@@ -51,7 +53,9 @@ export default function MyRecipeEditor({ recipe, onPage, handleCancel }) {
                 <div className="flex flex-col flex-wrap items-center gap-10 py-20">
                     <div className="flex flex-col w-2/5 p-5 bg-white border border-[#dfdfdf] rounded-xl">
                         <div className="text-center">
-                            <h1 className="text-3xl font-[Pacifico] text-[#3a4e15] pb-6">Recipe updated!</h1>
+                            <h1 className="text-3xl font-[Pacifico] text-[#3a4e15] pb-6">
+                                Recipe updated!
+                            </h1>
                         </div>
                         <button
                             onClick={() => onPage("createRecipe")}
@@ -74,25 +78,37 @@ export default function MyRecipeEditor({ recipe, onPage, handleCancel }) {
                         onSubmit={handleSubmit}
                     >
                         <div className="text-center pb-4">
-                            <h1 className="text-3xl font-[Pacifico] text-[#3a4e15]">Update a Recipe</h1>
+                            <h1 className="text-3xl font-[Pacifico] text-[#3a4e15]">
+                                Update a Recipe
+                            </h1>
                         </div>
                         <div className="flex flex-row items-start gap-4 pb-4">
                             <div>
-                                {inputs.map((field) => (
-                                    <InputField
-                                        key={field}
-                                        onChange={handleChange}
-                                        placeholder={recipe[field]}
-                                        name={field}
-                                    />
-                                ))}
+                                {inputs.map((field) =>
+                                    field === "strCategory" ? (
+                                        <SelectDropDown
+                                            key={field}
+                                            name={field}
+                                            onChange={handleChange}
+                                            value={meal[field] || ""}
+                                            defaultValue={meal[field]}
+                                        />
+                                    ) : (
+                                        <InputField
+                                            key={field}
+                                            onChange={handleChange}
+                                            name={field}
+                                            value={meal[field] || ""}
+                                        />
+                                    )
+                                )}
                             </div>
                             <div>
                                 {ingredientInputs.map((field) => (
                                     <InputField
                                         key={field}
                                         onChange={handleChange}
-                                        placeholder={recipe[field]}
+                                        value={meal[field] || ""}
                                         name={field}
                                     />
                                 ))}
