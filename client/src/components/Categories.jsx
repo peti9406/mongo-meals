@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { fetchingCategories } from "../../utils/fetching";
 import CategoryCard from "./CategoryCard";
 import Loading from "./Loading";
 import ErrorComponent from "./ErrorComponent";
 
-function Categories({ onCategory }) {
+function Categories() {
+    const navigate = useNavigate();
     const [categories, setCategories] = useState([]);
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -35,7 +37,7 @@ function Categories({ onCategory }) {
                 <CategoryCard
                     key={category.idCategory}
                     category={category}
-                    onClick={() => onCategory(category.strCategory)}
+                    onClick={() => navigate(`/categories/${category.strCategory}`)}
                 />
             ))}
         </div>

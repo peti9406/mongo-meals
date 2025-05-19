@@ -2,8 +2,12 @@ import { useState } from "react";
 import InputField from "./InputField.jsx";
 import { createMeal } from "../../utils/mealCRUDMethods.js";
 import ErrorComponent from "./ErrorComponent.jsx";
+import { useNavigate } from "react-router-dom";
 
-export default function RecipeForm({ onPage }) {
+export default function RecipeForm() {
+
+    const navigate = useNavigate();
+
     const [meal, setMeal] = useState({});
     const [submitted, setSubmitted] = useState(false);
     const [ingredientInputs, setIngredientInputs] = useState(["strIngredient1", "strMeasure1"]);
@@ -61,7 +65,7 @@ export default function RecipeForm({ onPage }) {
                         <button
                             className="flex w-3/4 my-2 justify-center self-center rounded-md bg-[#3a4e15] px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-[#aaae8c] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-700"
                             type="button"
-                            onClick={() => onPage("home")}
+                            onClick={() => navigate("/")}
                         >
                             Back to Home
                         </button>
@@ -102,7 +106,7 @@ export default function RecipeForm({ onPage }) {
                             Submit
                         </button>
                         <button
-                            onClick={() => onPage("home")}
+                            onClick={() => navigate("/")}
                             type="button"
                             className="flex w-3/4 justify-center self-center rounded-md bg-[#a03131] px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-[#c36161] focus-visible:outline-2"
                         >

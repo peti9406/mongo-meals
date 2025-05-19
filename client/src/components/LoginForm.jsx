@@ -1,4 +1,9 @@
-function LoginForm({onPage}){
+import { useNavigate } from "react-router-dom";
+
+function LoginForm(){
+
+  const navigate = useNavigate();
+
     return (
         <div className="flex min-h-full flex-col justify-center">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -31,7 +36,7 @@ function LoginForm({onPage}){
       
           <p className="mt-10 text-center text-sm/6 text-gray-500">
             Not a member? 
-            <a onClick={() => onPage("registration")} className="cursor-pointer font-semibold text-green-700 hover:text-green-600"> Register</a>
+            <a onClick={() => navigate("/registration")} className="cursor-pointer font-semibold text-green-700 hover:text-green-600"> Register</a>
           </p>
         </div>
       </div>
