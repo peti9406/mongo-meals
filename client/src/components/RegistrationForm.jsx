@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { createUser } from "../../utils/UserCRUDMethods.js";
 import ErrorComponent from "./ErrorComponent.jsx";
+import { useNavigate } from "react-router-dom";
 
-function RegistrationForm({onPage}) {
+function RegistrationForm() {
+
+    const navigate = useNavigate();
+
     const [user, setUser] = useState({
         username: "",
         email: "",
@@ -82,7 +86,7 @@ function RegistrationForm({onPage}) {
 
                 <p className="mt-10 text-center text-sm text-gray-500">
                     Already have an account? 
-                    <a onClick={() => onPage("login")} className="font-semibold text-green-700 hover:text-green-600 cursor-pointer"> Sign in</a>
+                    <a onClick={() => navigate("/login")} className="font-semibold text-green-700 hover:text-green-600 cursor-pointer"> Sign in</a>
                 </p>
             </div>
         </div>

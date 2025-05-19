@@ -3,8 +3,57 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 
-createRoot(document.getElementById('root')).render(
+import ReactDOM from "react-dom/client";
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import Categories from './components/Categories.jsx';
+import FilteredCategory from './components/FilteredCategory.jsx';
+import Recipe from './components/Recipe.jsx';
+import RecipeForm from './components/RecipeForm.jsx';
+import MyRecipes from './components/MyRecipes.jsx';
+import LoginForm from './components/LoginForm.jsx';
+import RegistrationForm from './components/RegistrationForm.jsx';
+
+const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <App />,
+        children: [
+          {
+            path: "/",
+            element: <Categories />
+          },
+          {
+            path: "/categories/:category",
+            element: <FilteredCategory />
+          },
+          {
+            path: "/categories/:category/:recipeId",
+            element: <Recipe />
+          },
+          {
+            path: "/create",
+            element: <RecipeForm />
+          },
+          {
+            path: "/my-recipes",
+            element: <MyRecipes />
+          }, 
+          {
+            path: "/login",
+            element: <LoginForm />
+          },
+          {
+            path: "/registration",
+            element: <RegistrationForm />
+          }
+
+        ]
+    }
+])
+
+const root = ReactDOM.createRoot(document.getElementById('root'))
+root.render(
   <StrictMode>
-    <App />
+    <RouterProvider router={router}/>
   </StrictMode>,
 )
