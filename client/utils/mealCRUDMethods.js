@@ -74,3 +74,17 @@ export async function getRecipes() {
         throw error;
     }
 }
+
+export async function getRecipe(id) {
+    try {
+        const response = await fetch(`/api/meals/myrecipes/${id}`);
+
+        throwError(response, "get ");
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}

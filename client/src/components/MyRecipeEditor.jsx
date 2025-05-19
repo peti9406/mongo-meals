@@ -2,22 +2,42 @@ import InputField from "./InputField";
 import { updateMeal } from "../../utils/mealCRUDMethods";
 import { useEffect, useState } from "react";
 import SelectDropDown from "./SelectDropDown";
+import { useNavigate, useParams } from "react-router-dom";
+import { getRecipe } from "../../utils/mealCRUDMethods";
+import ErrorComponent from "./ErrorComponent";
+import Loading from "./Loading";
 
-export default function MyRecipeEditor({ recipe, onPage, handleCancel }) {
-    const [meal, setMeal] = useState({ _id: recipe._id });
+function getIngredientInputs(meal) {
+    return Object.keys(meal).filter(
+        (key) => key.includes("strIngredient") || key.includes("strMeasure")
+    );
+}
+
+export default function MyRecipeEditor() {
+    const [meal, setMeal] = useState({});
     const [submitted, setSubmitted] = useState(false);
     const [ingredientInputs, setIngredientInputs] = useState([]);
+    const [error, setError] = useState(false);
+    const [loading, setLoading] = useState(true);
+
+    const { id } = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
-        setMeal(recipe);
-        function getIngredientInputs() {
-            return Object.keys(recipe).filter(
-                (key) => key.includes("strIngredient") || key.includes("strMeasure")
-            );
+        async function getRecipeData() {
+            try {
+                const data = await getRecipe(id);
+                setMeal(data);
+                const ingInputs = getIngredientInputs(data);
+                setIngredientInputs(ingInputs);
+                setLoading(false);
+            } catch (error) {
+                console.log(error);
+                setError(error);
+            }
         }
-        const ingInputs = getIngredientInputs();
-        setIngredientInputs(ingInputs);
-    }, [recipe]);
+        getRecipeData();
+    }, [id]);
 
     const inputs = [
         "strMeal",
@@ -47,6 +67,9 @@ export default function MyRecipeEditor({ recipe, onPage, handleCancel }) {
         setIngredientInputs((prev) => [...prev, `strIngredient${index}`, `strMeasure${index}`]);
     }
 
+    if (error) return <ErrorComponent error={error} />;
+    if (loading) return <Loading />;
+
     return (
         <>
             {submitted ? (
@@ -58,13 +81,19 @@ export default function MyRecipeEditor({ recipe, onPage, handleCancel }) {
                             </h1>
                         </div>
                         <button
-                            onClick={() => onPage("createRecipe")}
+                            onClick={() => navigate("/create")}
                             className="flex w-3/4 my-1.5 justify-center self-center rounded-md bg-[#3a4e15] px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-[#aaae8c] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-700"
                         >
                             Create new Recipe
                         </button>
                         <button
-                            onClick={() => onPage("home")}
+                            onClick={() => navigate("/my-recipes")}
+                            className="flex w-3/4 my-1.5 justify-center self-center rounded-md bg-[#3a4e15] px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-[#aaae8c] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-700"
+                        >
+                            My Recipes
+                        </button>
+                        <button
+                            onClick={() => navigate("/")}
                             className="flex w-3/4 my-1.5 justify-center self-center rounded-md bg-[#3a4e15] px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-[#aaae8c] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-700"
                         >
                             Back to Home
@@ -128,7 +157,7 @@ export default function MyRecipeEditor({ recipe, onPage, handleCancel }) {
                             Update
                         </button>
                         <button
-                            onClick={() => handleCancel(null)}
+                            onClick={() => navigate("/my-recipes")}
                             type="button"
                             className="flex w-3/4 justify-center self-center rounded-md bg-[#a03131] px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-[#c36161] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700"
                         >

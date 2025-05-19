@@ -3,8 +3,11 @@ import { fetchingRecipeDetails } from "../../utils/fetching";
 import Ingredients from "./Ingredients";
 import Loading from "./Loading";
 import ErrorComponent from "./ErrorComponent";
+import { useNavigate, useParams } from "react-router-dom";
 
-function Recipe({ id, onBack, onPage }) {
+function Recipe() {
+    const { category, recipeId } = useParams();
+    const navigate = useNavigate();
     const [recipe, setRecipe] = useState({});
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -12,7 +15,7 @@ function Recipe({ id, onBack, onPage }) {
     useEffect(() => {
         async function getRecipeDetails() {
             try {
-                const recipeDetails = await fetchingRecipeDetails(id);
+                const recipeDetails = await fetchingRecipeDetails(recipeId);
                 setRecipe(recipeDetails.meals[0]);
                 setLoading(false);
             } catch (error) {
@@ -21,7 +24,7 @@ function Recipe({ id, onBack, onPage }) {
             }
         }
         getRecipeDetails();
-    }, [id]);
+    }, [recipeId]);
 
     function getYoutubeEmbedVideo(url) {
         if (!url) return null;
@@ -31,11 +34,6 @@ function Recipe({ id, onBack, onPage }) {
     }
 
     const embedUrl = getYoutubeEmbedVideo(recipe.strYoutube);
-
-    function handleBack() {
-        onBack(null);
-        onPage("categories");
-    }
 
     if (error) {
         return <ErrorComponent error={error} />;
@@ -79,7 +77,7 @@ function Recipe({ id, onBack, onPage }) {
                 )}
                 <div className="flex flex-grow justify-end items-end">
                     <button
-                        onClick={handleBack}
+                        onClick={() => navigate(`/categories/${category}`)}
                         className="rounded-md bg-[#3a4e15] px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-[#aaae8c] cursor-pointer"
                     >
                         Back

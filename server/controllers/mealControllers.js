@@ -15,7 +15,6 @@ export const createMeal = async (req, res) => {
     try {
         const meal = req.body;
         const createdMeal = await MyRecipe.create(meal);
-        console.log(createdMeal);
         return res.json(createdMeal);
     } catch (error) {
         console.log(error);
@@ -27,6 +26,16 @@ export const getMyRecipes = async (req, res) => {
     try {
         const myrecipes = await MyRecipe.find({});
         return res.json(myrecipes);
+    } catch (error) {
+        console.log(error);
+        res.status(404).send("No recipes found!");
+    }
+};
+
+export const getMyRecipe = async (req, res) => {
+    try {
+        const myRecipe = await MyRecipe.findById(req.params.id);
+        return res.json(myRecipe);
     } catch (error) {
         console.log(error);
         res.status(404).send("No recipes found!");

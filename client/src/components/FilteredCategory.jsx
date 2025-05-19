@@ -1,10 +1,15 @@
 import { fetchingByCategory } from "../../utils/fetching";
 import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import RecipeCard from "./RecipeCard";
 import Loading from "./Loading";
 import ErrorComponent from "./ErrorComponent";
 
-function FilteredCategory({ category, onRecipe }) {
+function FilteredCategory() {
+
+    const { category } = useParams();
+    const navigate = useNavigate();
+
     const [recipes, setRecipes] = useState([]);
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -45,7 +50,7 @@ function FilteredCategory({ category, onRecipe }) {
                         <RecipeCard
                             recipe={recipe}
                             key={recipe.idMeal}
-                            onClick={() => onRecipe(recipe.idMeal)}
+                            onClick={() => navigate(`/categories/${category}/${recipe.idMeal}`)}
                         />
                     );
                 })}
