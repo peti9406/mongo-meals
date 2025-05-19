@@ -7,12 +7,10 @@ import Loading from "./Loading.jsx";
 import { handleDelete, getRecipes } from "../../utils/mealCRUDMethods.js";
 import { useNavigate } from "react-router-dom";
 
-export default function MyRecipes({ onPage }) {
-
+export default function MyRecipes() {
     const navigate = useNavigate();
 
     const [myRecipes, setMyRecipes] = useState([]);
-    const [recipeToEdit, setRecipeToEdit] = useState(null);
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(true);
 
@@ -29,14 +27,6 @@ export default function MyRecipes({ onPage }) {
         getMyRecipes();
     }, [myRecipes]);
 
-    async function handleEdit(recipe) {
-        setRecipeToEdit(recipe);
-    }
-
-    function handleCancel(setNull) {
-        setRecipeToEdit(setNull);
-    }
-
     if (error) {
         return <ErrorComponent error={error} />;
     }
@@ -44,9 +34,7 @@ export default function MyRecipes({ onPage }) {
         return <Loading />;
     }
 
-    return recipeToEdit ? (
-        <MyRecipeEditor handleCancel={handleCancel} onPage={onPage} recipe={recipeToEdit} />
-    ) : (
+    return (
         <div className="flex flex-col flex-wrap items-center gap-10 py-20">
             <div className="flex flex-col w-2/5 p-5 bg-white border border-[#dfdfdf] rounded-xl">
                 <div className="text-center">
@@ -58,7 +46,6 @@ export default function MyRecipes({ onPage }) {
                             <MyRecipe
                                 key={recipe._id}
                                 recipe={recipe}
-                                onEditClick={handleEdit}
                                 onDeleteClick={handleDelete}
                             />
                         ))}

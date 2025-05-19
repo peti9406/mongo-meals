@@ -1,10 +1,10 @@
-export default function MyRecipe({ recipe, onDeleteClick, onEditClick }) {
+import { useNavigate } from "react-router-dom";
+
+export default function MyRecipe({ recipe, onDeleteClick }) {
+    const navigate = useNavigate();
+
     function handleDelete() {
         onDeleteClick(recipe);
-    }
-
-    function handleEdit() {
-        onEditClick(recipe);
     }
 
     return (
@@ -16,7 +16,7 @@ export default function MyRecipe({ recipe, onDeleteClick, onEditClick }) {
                 </div>
                 <div className="flex items-center gap-2 w-1/3">
                     <button
-                        onClick={handleEdit}
+                        onClick={() => navigate(`/my-recipes/recipe/${recipe._id}`)}
                         className="flex h-2/3 w-full justify-center items-center mx-auto rounded-md bg-[#3a4e15] px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-[#aaae8c] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-700"
                     >
                         Edit
