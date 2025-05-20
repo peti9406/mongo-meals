@@ -65,3 +65,14 @@ export const updateMyRecipe = async (req, res) => {
         res.status(400).send("Could not update recipe!");
     }
 };
+
+export const getSearchedMeals = async (req, res) => {
+    try {
+        const { search } = req.params;
+        const searchedRecipes = await Meal.find({strMeal: {$regex: `${search}`, $options: "i"}});
+        return res.json(searchedRecipes);
+    } catch (error) {
+        console.log(error);
+        res.status(400).send("No recipes found!")
+    }
+}

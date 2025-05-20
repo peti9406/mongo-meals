@@ -12,6 +12,7 @@ import MyRecipes from "./components/MyRecipes.jsx";
 import LoginForm from "./components/LoginForm.jsx";
 import RegistrationForm from "./components/RegistrationForm.jsx";
 import MyRecipeEditor from "./components/MyRecipeEditor.jsx";
+import RecipeList from "./components/RecipeList.jsx";
 import LoginRedirect from "./components/LoginRedirect.jsx";
 
 const router = createBrowserRouter([
@@ -39,7 +40,10 @@ const router = createBrowserRouter([
                 path: "/my-recipes",
                 element: <MyRecipes />,
             },
-            { path: "/my-recipes/recipe/:id", element: <MyRecipeEditor /> },
+            {
+                path: "/my-recipes/recipe/:id",
+                element: <MyRecipeEditor />,
+            },
             {
                 path: "/login",
                 element: <LoginForm />,
@@ -48,7 +52,6 @@ const router = createBrowserRouter([
                 path: "/registration",
                 element: <RegistrationForm />,
             },
-            { path: "/login-redirect", element: <LoginRedirect /> },
         ],
     },
 ]);
