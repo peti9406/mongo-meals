@@ -45,7 +45,7 @@ export async function updateMeal(meal) {
     }
 }
 
-export async function handleDelete(recipe) {
+export async function handleRecipeDelete(recipe) {
     const { _id } = recipe;
     try {
         const response = await fetch(`/api/meals/myrecipes/${_id}`, {
@@ -61,14 +61,14 @@ export async function handleDelete(recipe) {
     }
 }
 
-export async function getRecipes() {
+export async function getRecipes(id) {
     const token = localStorage.getItem("token");
     try {
-        const response = await fetch("/api/meals/myrecipes", {
+        const response = await fetch(`/api/meals/myrecipes/user/${id}`, {
             method: "GET",
             headers: {
-                "Authorization": `Bearer ${token}`
-            }
+                Authorization: `Bearer ${token}`,
+            },
         });
 
         throwError(response, "get ");
