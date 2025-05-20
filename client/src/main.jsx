@@ -52,6 +52,11 @@ const router = createBrowserRouter([
                 path: "/registration",
                 element: <RegistrationForm />,
             },
+            { path: "/login-redirect", element: <LoginRedirect /> },
+            {
+                path: "/search",
+                element: <RecipeList />,
+            },
         ],
     },
 ]);
