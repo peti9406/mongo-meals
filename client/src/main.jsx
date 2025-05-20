@@ -12,6 +12,7 @@ import MyRecipes from "./components/MyRecipes.jsx";
 import LoginForm from "./components/LoginForm.jsx";
 import RegistrationForm from "./components/RegistrationForm.jsx";
 import MyRecipeEditor from "./components/MyRecipeEditor.jsx";
+import LogoutMessage from "./components/LogoutMessage.jsx";
 
 const router = createBrowserRouter([
     {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
             {
                 path: "/registration",
                 element: <RegistrationForm />,
+            },
+            {
+                path: "/logout",
+                element: <LogoutMessage />,
             },
         ],
     },
