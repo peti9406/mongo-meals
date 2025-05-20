@@ -3,8 +3,16 @@ import { useEffect, useState } from "react";
 
 
 function Navbar() {
-
     const navigate = useNavigate();
+
+    const token = localStorage.getItem("token");
+    const isAuthenticated = token && token.trim() !== "";
+
+    function handleLogout(){
+        localStorage.clear("token");
+        navigate("/logout");
+    }
+
     const location = useLocation();
     const [search, setSearch] = useState("");
 
@@ -60,14 +68,22 @@ function Navbar() {
                     </button>
                 </div>
             </div>
+
             <div className="flex gap-50 mx-20 grow">
                 <div className="flex flex-2/3 justify-center items-center">
                     <input value={search} onChange={(e) => handleSearch(e)} placeholder="Search a recipe..." className="placeholder-[#aaae8c] text-[#3a4e15] border border-[#aaae8c] rounded-full pl-2 w-full h-8"></input>
                 </div>
                 <div className="flex flex-1/3 justify-end">
-                    <a onClick={() => navigate("/login")} className="m-4 cursor-pointer font-semibold text-[#3a4e15] hover:scale-102 hover:text-[#aaae8c] transition-transform duration-500 ease-in-out transform">
-                        Login
-                    </a>
+                    {isAuthenticated 
+                        ? 
+                        (<a onClick={handleLogout} className="m-4 cursor-pointer font-semibold text-[#3a4e15] hover:scale-102 hover:text-[#aaae8c] transition-transform duration-500 ease-in-out transform">
+                            Logout
+                        </a>)
+                        :
+                        (<a onClick={() => navigate("/login")} className="m-4 cursor-pointer font-semibold text-[#3a4e15] hover:scale-102 hover:text-[#aaae8c] transition-transform duration-500 ease-in-out transform">
+                            Login
+                        </a>)
+                    }
                 </div>
             </div>
         </div>

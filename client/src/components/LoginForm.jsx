@@ -19,16 +19,13 @@ function LoginForm(){
       const data = await response.json();
       if (data.token) {
             localStorage.setItem('token', data.token);
+            navigate("/");
       } else {
         throw new Error("Authorization failed!");
       }
     } catch (error){
       setError(error);
     }
-  }
-
-  if (error){
-    return <ErrorComponent error={error} />;
   }
 
   return (
@@ -38,6 +35,7 @@ function LoginForm(){
         <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">Sign in to your account</h2>
       </div>
       
+      {error && <ErrorComponent error={error} />}
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form className="space-y-6">
           <div>
