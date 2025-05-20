@@ -6,12 +6,13 @@ import {
     deleteMyRecipe,
     updateMyRecipe,
 } from "../controllers/mealControllers.js";
+import { authenticateToken } from "../controllers/authenticate.js";
 
 const mealRouter = express.Router();
 
 mealRouter.get("/", getAllMeals);
 mealRouter.post("/", createMeal);
-mealRouter.get("/myrecipes", getMyRecipes);
+mealRouter.get("/myrecipes", authenticateToken, getMyRecipes);
 mealRouter.delete("/myrecipes/:id", deleteMyRecipe);
 mealRouter.patch("/myrecipes/:id", updateMyRecipe);
 
