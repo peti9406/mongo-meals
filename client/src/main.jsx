@@ -13,6 +13,7 @@ import LoginForm from "./components/LoginForm.jsx";
 import RegistrationForm from "./components/RegistrationForm.jsx";
 import MyRecipeEditor from "./components/MyRecipeEditor.jsx";
 import RecipeList from "./components/RecipeList.jsx";
+import FavoriteRecipes from "./components/FavoriteRecipes.jsx";
 
 const router = createBrowserRouter([
     {
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
             {
                 path: "/search",
                 element: <RecipeList />
+            },
+            {
+                path: "/favorites",
+                element: <FavoriteRecipes />
             }
         ],
     },
