@@ -4,6 +4,9 @@ import { createMeal } from "../../utils/mealCRUDMethods.js";
 import ErrorComponent from "./ErrorComponent.jsx";
 import SelectDropDown from "./SelectDropDown.jsx";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { getUser, updateUser } from "../../utils/UserCRUDMethods.js";
+import Loading from "./Loading.jsx";
 
 export default function RecipeForm() {
     const navigate = useNavigate();
@@ -12,6 +15,30 @@ export default function RecipeForm() {
     const [submitted, setSubmitted] = useState(false);
     const [ingredientInputs, setIngredientInputs] = useState(["strIngredient1", "strMeasure1"]);
     const [error, setError] = useState(null);
+    const [user, setUser] = useState({});
+    const [loading, setLoading] = useState(true);
+
+    const token = localStorage.getItem("token") || null;
+
+    useEffect(() => {
+        async function getData() {
+            try {
+                const data = await getUser(token);
+                setUser(data);
+                setLoading(false);
+            } catch (error) {
+                setError(error);
+            }
+        }
+        getData();
+    }, [user, token]);
+
+    if (!token) {
+        return navigate("/login-redirect");
+    }
+    if (loading) {
+        return <Loading />;
+    }
 
     const inputs = [
         "strMeal",
@@ -32,8 +59,10 @@ export default function RecipeForm() {
 
     async function handleSubmit(event) {
         event.preventDefault();
+        meal.madeBy = user._id;
         try {
-            await createMeal(meal);
+            const createdMeal = await createMeal(meal);
+            await updateUser(user._id, createdMeal._id);
             setSubmitted(true);
         } catch (error) {
             setError(error);

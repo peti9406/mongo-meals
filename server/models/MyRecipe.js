@@ -71,5 +71,6 @@ const myRecipeSchema = new Schema({
     strMeasure19: String,
     strMeasure20: String,
     strSource: String,
+    madeBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 });
 export default model("Recipe", myRecipeSchema);
