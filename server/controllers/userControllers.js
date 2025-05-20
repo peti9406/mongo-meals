@@ -1,7 +1,6 @@
 import User from "../models/User.js";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import mongoose from "mongoose";
 
 dotenv.config();
 const SECRET_KEY = process.env.JWT_SECRET;
