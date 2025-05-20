@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import MyRecipe from "./MyRecipe.jsx";
-import MyRecipeEditor from "./MyRecipeEditor.jsx";
 import ErrorComponent from "./ErrorComponent.jsx";
 import Loading from "./Loading.jsx";
-import { handleDelete, getRecipes } from "../../utils/mealCRUDMethods.js";
+import { handleRecipeDelete, getRecipes } from "../../utils/mealCRUDMethods.js";
 import { useNavigate } from "react-router-dom";
+import { deleteUserRecipe, getUser } from "../../utils/UserCRUDMethods.js";
 
 export default function MyRecipes() {
     const navigate = useNavigate();
@@ -13,11 +13,16 @@ export default function MyRecipes() {
     const [myRecipes, setMyRecipes] = useState([]);
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [user, setUser] = useState({});
+
+    const token = localStorage.getItem("token") || null;
 
     useEffect(() => {
         async function getMyRecipes() {
             try {
-                const recipes = await getRecipes();
+                const userData = await getUser(token);
+                const recipes = await getRecipes(userData._id);
+                setUser(userData);
                 setMyRecipes(recipes);
                 setLoading(false);
             } catch (error) {
@@ -25,8 +30,16 @@ export default function MyRecipes() {
             }
         }
         getMyRecipes();
-    }, [myRecipes]);
+    }, [myRecipes, token]);
 
+    async function handleDelete(recipe) {
+        handleRecipeDelete(recipe);
+        deleteUserRecipe(user._id, recipe._id);
+    }
+
+    if (!token) {
+        return navigate("/login-redirect");
+    }
     if (error) {
         return <ErrorComponent error={error} />;
     }

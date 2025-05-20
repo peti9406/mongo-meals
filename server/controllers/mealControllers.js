@@ -24,7 +24,8 @@ export const createMeal = async (req, res) => {
 
 export const getMyRecipes = async (req, res) => {
     try {
-        const myrecipes = await MyRecipe.find({});
+        const { id } = req.params;
+        const myrecipes = await MyRecipe.find({ madeBy: id });
         return res.json(myrecipes);
     } catch (error) {
         console.log(error);
