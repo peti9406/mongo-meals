@@ -88,3 +88,14 @@ export async function getRecipe(id) {
         throw error;
     }
 }
+
+export async function getSearchedRecipes(search) {
+    try {
+        const response = await fetch(`/api/meals/${search}`);
+        const data = await response.json();
+        return data
+    } catch (error) {
+        console.log(error)
+        throw error;
+    }
+}

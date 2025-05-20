@@ -77,7 +77,7 @@ function Recipe() {
                 )}
                 <div className="flex flex-grow justify-end items-end">
                     <button
-                        onClick={() => navigate(`/categories/${category}`)}
+                        onClick={() => navigate(-1)}
                         className="rounded-md bg-[#3a4e15] px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-[#aaae8c] cursor-pointer"
                     >
                         Back

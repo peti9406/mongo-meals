@@ -6,6 +6,7 @@ import {
     deleteMyRecipe,
     updateMyRecipe,
     getMyRecipe,
+    getSearchedMeals
 } from "../controllers/mealControllers.js";
 
 const mealRouter = express.Router();
@@ -16,5 +17,6 @@ mealRouter.get("/myrecipes", getMyRecipes);
 mealRouter.get("/myrecipes/:id", getMyRecipe);
 mealRouter.delete("/myrecipes/:id", deleteMyRecipe);
 mealRouter.patch("/myrecipes/:id", updateMyRecipe);
+mealRouter.get("/:search", getSearchedMeals);
 
 export default mealRouter;
