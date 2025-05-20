@@ -1,4 +1,9 @@
-function Navbar({ onPage }) {
+import { useNavigate } from "react-router-dom";
+
+function Navbar() {
+
+    const navigate = useNavigate();
+
     return (
         <div className="flex items-center mx-auto grow bg-white sticky top-0 z-50 border-b border-[#dfdfdf]">
             <div className="flex gap-10 ml-20">
@@ -6,20 +11,20 @@ function Navbar({ onPage }) {
                     <img
                         src="./src/assets/MongoMealsLogo.png"
                         className="h-25 cursor-pointer"
-                        onClick={() => onPage("home")}
+                        onClick={() => navigate("/")}
                     />
                 </div>
                 <div className="flex items-center overflow-hidden">
                     <a
                         className="m-4 cursor-pointer font-semibold text-[#3a4e15] hover:scale-102 hover:text-[#aaae8c] transition-transform duration-500 ease-in-out transform"
-                        onClick={() => onPage("home")}
+                        onClick={() => navigate("/")}
                     >
                         Home
                     </a>
                 </div>
                 <div className="flex items-center">
                     <button
-                        onClick={() => onPage("createRecipe")}
+                        onClick={() => navigate("/create")}
                         className="m-4 cursor-pointer font-semibold text-[#3a4e15] hover:scale-102 hover:text-[#aaae8c] transition-transform duration-500 ease-in-out transform"
                     >
                         Create Recipe
@@ -27,7 +32,7 @@ function Navbar({ onPage }) {
                 </div>
                 <div className="flex items-center">
                     <button
-                        onClick={() => onPage("myRecipes")}
+                        onClick={() => navigate("/my-recipes")}
                         className="m-4 cursor-pointer font-semibold text-[#3a4e15] hover:scale-102 hover:text-[#aaae8c] transition-transform duration-500 ease-in-out transform"
                     >
                         My Recipes
@@ -35,7 +40,7 @@ function Navbar({ onPage }) {
                 </div>
             </div>
             <div className="flex items-center ml-auto mr-20">
-                <a onClick={() => onPage("login")} className="m-4 cursor-pointer font-semibold text-[#3a4e15] hover:scale-102 hover:text-[#aaae8c] transition-transform duration-500 ease-in-out transform">
+                <a onClick={() => navigate("/login")} className="m-4 cursor-pointer font-semibold text-[#3a4e15] hover:scale-102 hover:text-[#aaae8c] transition-transform duration-500 ease-in-out transform">
                     Login
                 </a>
             </div>
