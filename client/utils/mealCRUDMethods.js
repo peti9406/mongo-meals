@@ -62,8 +62,14 @@ export async function handleDelete(recipe) {
 }
 
 export async function getRecipes() {
+    const token = localStorage.getItem("token");
     try {
-        const response = await fetch("/api/meals/myrecipes");
+        const response = await fetch("/api/meals/myrecipes", {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
 
         throwError(response, "get ");
 
