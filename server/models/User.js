@@ -13,10 +13,12 @@ const userSchema = new Schema({
     fullName: String,
     password: String,
     myRecipes: [{ type: mongoose.Schema.Types.ObjectId, ref: "Recipe", default: null }],
-    favorites: [{ 
-        type: Schema.Types.ObjectId, 
-        ref: "Meal",
-    }]
+    favorites: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Meal",
+        },
+    ],
 });
 
 export default model("User", userSchema);

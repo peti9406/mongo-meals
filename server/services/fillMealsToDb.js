@@ -3,7 +3,7 @@ import Meal from "../models/Meal.js";
 async function fillMealsToDb(meals) {
     for (const meal of meals) {
         await Meal.create({
-            _id: meal.idMeal,
+            webID: meal.idMeal,
             strMeal: meal.strMeal,
             strCategory: meal.strCategory,
             strArea: meal.strArea,
