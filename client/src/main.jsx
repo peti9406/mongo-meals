@@ -12,6 +12,7 @@ import MyRecipes from "./components/MyRecipes.jsx";
 import LoginForm from "./components/LoginForm.jsx";
 import RegistrationForm from "./components/RegistrationForm.jsx";
 import MyRecipeEditor from "./components/MyRecipeEditor.jsx";
+import LogoutMessage from "./components/LogoutMessage.jsx";
 import RecipeList from "./components/RecipeList.jsx";
 import LoginRedirect from "./components/LoginRedirect.jsx";
 import FavoriteRecipes from "./components/FavoriteRecipes.jsx";
@@ -53,7 +54,14 @@ const router = createBrowserRouter([
                 path: "/registration",
                 element: <RegistrationForm />,
             },
-            { path: "/login-redirect", element: <LoginRedirect /> },
+            {
+                path: "/logout",
+                element: <LogoutMessage />,
+            },
+            {
+                path: "/login-redirect", 
+                element: <LoginRedirect /> 
+            },
             {
                 path: "/search",
                 element: <RecipeList />
