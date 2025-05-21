@@ -18,7 +18,7 @@ function RecipeCard({ recipe, onClick }) {
     }
 
     return (
-        <div className="group relative w-1/4 overflow-hidden rounded-md cursor-pointer">
+        <div className="group relative w-1/4 overflow-hidden rounded-md cursor-pointer" onClick={onClick}>
             <img
                 src={recipe.strMealThumb}
                 alt={`Image of ${recipe.strMeal}`}
