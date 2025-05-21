@@ -26,7 +26,7 @@ export const getUser = async (req, res) => {
         req.user = decoded;
         const { id } = decoded;
 
-        const user = await User.findById(id);
+        const user = await User.findById(id).populate("favorites");
 
         return res.json(user);
     } catch (error) {

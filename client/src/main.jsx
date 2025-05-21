@@ -15,6 +15,7 @@ import MyRecipeEditor from "./components/MyRecipeEditor.jsx";
 import LogoutMessage from "./components/LogoutMessage.jsx";
 import RecipeList from "./components/RecipeList.jsx";
 import LoginRedirect from "./components/LoginRedirect.jsx";
+import FavoriteRecipes from "./components/FavoriteRecipes.jsx";
 
 const router = createBrowserRouter([
     {
@@ -63,8 +64,12 @@ const router = createBrowserRouter([
             },
             {
                 path: "/search",
-                element: <RecipeList />,
+                element: <RecipeList />
             },
+            {
+                path: "/favorites",
+                element: <FavoriteRecipes />
+            }
         ],
     },
 ]);

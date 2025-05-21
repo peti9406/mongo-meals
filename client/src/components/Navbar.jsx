@@ -67,6 +67,14 @@ function Navbar() {
                         My Recipes
                     </button>
                 </div>
+                <div className="flex items-center">
+                    <button
+                        onClick={() => navigate("/favorites")}
+                        className="m-4 cursor-pointer font-semibold text-[#3a4e15] hover:scale-102 hover:text-[#aaae8c] transition-transform duration-500 ease-in-out transform"
+                    >
+                        Favorites
+                    </button>
+                </div>
             </div>
 
             <div className="flex gap-50 mx-20 grow">
