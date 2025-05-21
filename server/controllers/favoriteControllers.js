@@ -11,11 +11,12 @@ if (!SECRET_KEY) {
 
 export const postFavorite = async (req, res) => {
     try {
-        const favorite = req.body.recipeID;
+        const webID = req.body.recipeID;
+        const [favorite] = await Meal.find({ webID: webID });
         const updatedUser = await User.findByIdAndUpdate(
             req.params.id,
-            {$addToSet: {favorites: favorite}},
-            {new: true}
+            { $addToSet: { favorites: favorite._id } },
+            { new: true }
         );
         return await res.json(updatedUser);
     } catch (error) {
@@ -26,15 +27,16 @@ export const postFavorite = async (req, res) => {
 
 export const deleteFavorite = async (req, res) => {
     try {
-        const favorite = req.body.recipeID;
+        const webID = req.body.recipeID;
+        const favorite = await Meal.findOne({ webID: webID });
         const updatedUser = await User.findByIdAndUpdate(
             req.params.id,
-            {$pull: {favorites: favorite}},
-            {new: true}
+            { $pull: { favorites: favorite._id } },
+            { new: true }
         );
         return await res.json(updatedUser);
     } catch (error) {
         console.log(error);
         res.status(400).send("Could not remove favorite from user!");
     }
-}
+};
