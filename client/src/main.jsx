@@ -14,6 +14,7 @@ import RegistrationForm from "./components/RegistrationForm.jsx";
 import MyRecipeEditor from "./components/MyRecipeEditor.jsx";
 import RecipeList from "./components/RecipeList.jsx";
 import LoginRedirect from "./components/LoginRedirect.jsx";
+import FavoriteRecipes from "./components/FavoriteRecipes.jsx";
 
 const router = createBrowserRouter([
     {

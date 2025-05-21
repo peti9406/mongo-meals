@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import mealRouter from "./routes/mealRoutes.js";
 import userRouter from "./routes/userRoutes.js";
+import favoritesRouter from "./routes/favoritesRoutes.js"
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
@@ -16,6 +17,7 @@ const port = 3000;
 app.use(express.json());
 app.use("/api/users", userRouter);
 app.use("/api/meals", mealRouter);
+app.use("/api/favorites", favoritesRouter);
 
 const SECRET_KEY = process.env.JWT_SECRET;
 
