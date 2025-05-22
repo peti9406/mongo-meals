@@ -1,32 +1,26 @@
-import { useNavigate, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 
 function Navbar() {
     const navigate = useNavigate();
-    const location = useLocation();
-    const [search, setSearch] = useState("");
+    const [searchInput, setSearchInput] = useState("");
 
     const token = localStorage.getItem("token");
     const isAuthenticated = token && token.trim() !== "";
+
 
     function handleLogout(){
         localStorage.clear("token");
         navigate("/logout");
     }
 
-    useEffect(() => {
-        if (location.pathname !== "/search") {
-            setSearch("");
-        }
-    }, [location]);
-
     async function handleSearch(e) {
-        const searchText = e.target.value;
-        setSearch(searchText);
+        const value = e.target.value;
+        setSearchInput(value);
 
-        if (searchText !== "") {
-            navigate("/search", {state: {searchTerm : searchText}});
+        if (value !== "") {
+            navigate(`/search?searchText=${encodeURIComponent(value)}`);
         } else {
             navigate("/");
         }
@@ -78,7 +72,7 @@ function Navbar() {
 
             <div className="flex gap-50 mx-20 grow">
                 <div className="flex flex-2/3 justify-center items-center">
-                    <input value={search} onChange={(e) => handleSearch(e)} placeholder="Search a recipe..." className="placeholder-[#aaae8c] text-[#3a4e15] border border-[#aaae8c] rounded-full pl-2 w-full h-8"></input>
+                    <input value={searchInput} onChange={(e) => handleSearch(e)} placeholder="Search a recipe..." className="placeholder-[#aaae8c] text-[#3a4e15] border border-[#aaae8c] rounded-full pl-2 w-full h-8"></input>
                 </div>
                 <div className="flex flex-1/3 justify-end">
                     {isAuthenticated 
