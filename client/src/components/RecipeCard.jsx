@@ -1,76 +1,46 @@
 import { addFavorite, removeFavorite } from "../../utils/favoritesCRUDMethods.js";
-import { getUser } from "../../utils/UserCRUDMethods";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
-import { useState } from "react";
-import { useEffect } from "react";
-import ErrorComponent from "./ErrorComponent.jsx";
-import Loading from "./Loading.jsx";
+import { useEffect, useState } from "react";
 
-function RecipeCard({ recipe, onClick, favorites, onEmpty }) {
-    const [user, setUser] = useState({});
-    const [userFavorites, setUserFavorites] = useState(favorites || []);
+function RecipeCard({ favorites = [], onFavChange = null, recipe, onClick }) {
     const [isFavorite, setIsFavorite] = useState(false);
-    const [error, setError] = useState(false);
-    const [loading, setLoading] = useState(false);
-
-    const token = localStorage.getItem("token") || null;
+    const [token, setToken] = useState(false);
 
     useEffect(() => {
-        async function getDatas() {
+        function getToken() {
+            const token = localStorage.getItem("token") || null;
             if (token) {
-                try {
-                    setLoading(true);
-                    const user = await getUser(token);
-                    setUser(user);
-                    setUserFavorites(user.favorites);
-                    user.favorites.forEach((favorite) => {
-                        if (
-                            favorite.webID === Number(recipe.idMeal) ||
-                            favorite.webID === Number(recipe.webID)
-                        ) {
-                            setIsFavorite(true);
-                        }
-                    });
-                    setLoading(false);
-                } catch (error) {
-                    console.log(error);
-                    setError(error);
-                }
+                setToken(true);
+                favorites.forEach((favorite) => {
+                    if (favorite._id === recipe._id || favorite.webID === Number(recipe.idMeal)) {
+                        setIsFavorite(true);
+                    }
+                });
             }
         }
-        getDatas();
-    }, [token, recipe]);
 
-    async function handleAddFavorite(user, recipeID = recipe.webID) {
+        getToken();
+    }, [favorites, recipe]);
+
+    async function handleFavoriteButton(button, recipeID = recipe.webID) {
         try {
-            const favorite = await addFavorite(user._id, recipeID);
-            setIsFavorite(true);
-            setUserFavorites((prev) => [...prev, favorite]);
-            return favorite;
+            const user = JSON.parse(localStorage.getItem("user"));
+            let updatedUser = null;
+            if (button === "add") {
+                updatedUser = await addFavorite(user._id, recipeID);
+                setIsFavorite(true);
+            } else if (button === "remove") {
+                updatedUser = await removeFavorite(user._id, recipeID);
+                setIsFavorite(false);
+            }
+            user.favorites = [...updatedUser.favorites];
+            if (onFavChange) onFavChange(user.favorites);
+            localStorage.setItem("user", JSON.stringify(user));
         } catch (error) {
             console.log(error);
         }
-    }
-
-    async function handleRemoveFavorite(user, recipeID = recipe.webID) {
-        try {
-            await removeFavorite(user._id, recipeID);
-            setIsFavorite(false);
-            const newFavorites = userFavorites.filter((userFav) => userFav.webID !== recipeID);
-            if (newFavorites.length === 0) return onEmpty(true);
-            setUserFavorites(newFavorites);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    if (error) {
-        return <ErrorComponent error={error} />;
-    }
-    if (loading) {
-        return <Loading />;
     }
 
     return (
@@ -95,7 +65,7 @@ function RecipeCard({ recipe, onClick, favorites, onEmpty }) {
                                 <button
                                     onClick={(e) => {
                                         e.stopPropagation();
-                                        handleRemoveFavorite(user, recipe.idMeal);
+                                        handleFavoriteButton("remove", recipe.idMeal);
                                     }}
                                     className="text-black rounded-full w-10 h-10 flex items-center justify-center font-bold text-xl hover:scale-120 transition-transform duration-100 ease-in-out"
                                 >
@@ -108,7 +78,7 @@ function RecipeCard({ recipe, onClick, favorites, onEmpty }) {
                                 <button
                                     onClick={(e) => {
                                         e.stopPropagation();
-                                        handleAddFavorite(user, recipe.idMeal);
+                                        handleFavoriteButton("add", recipe.idMeal);
                                     }}
                                     className="text-black rounded-full w-10 h-10 flex items-center justify-center font-bold text-xl hover:scale-120 transition-transform duration-100 ease-in-out"
                                 >
