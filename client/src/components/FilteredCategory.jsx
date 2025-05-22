@@ -44,7 +44,7 @@ function FilteredCategory() {
             <div>
                 <h1 className="text-6xl font-[Pacifico] text-[#3a4e15] py-10">{category}</h1>
             </div>
-            <div className="flex flex-wrap w-3/4 justify-center gap-15 pb-10">
+            <div className="flex flex-wrap w-3/4 justify-center gap-5 pb-10">
                 {recipes.map((recipe) => {
                     return (
                         <RecipeCard

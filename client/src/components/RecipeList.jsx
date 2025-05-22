@@ -28,7 +28,7 @@ function RecipeList() {
 
     return (
         <div className="flex flex-col items-center">
-            <div className="flex flex-wrap w-3/4 justify-center gap-15 py-10">
+            <div className="flex flex-wrap w-3/4 justify-center gap-5 py-10">
                 {recipes.map((recipe) => {
                     return (
                         <RecipeCard
