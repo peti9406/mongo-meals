@@ -1,46 +1,27 @@
 import { useEffect, useState } from "react";
 import RecipeCard from "./RecipeCard";
-import { getUser } from "../../utils/UserCRUDMethods";
 import { useNavigate } from "react-router-dom";
-import Loading from "./Loading";
-import ErrorComponent from "./ErrorComponent";
 
 function FavoriteRecipes() {
     const navigate = useNavigate();
     const [favorites, setFavorites] = useState([]);
-    const [user, setUser] = useState({});
-    const [error, setError] = useState(false);
-    const [loading, setLoading] = useState(true);
 
     const token = localStorage.getItem("token") || null;
 
     useEffect(() => {
-        async function getFavorites(token) {
-            try {
-                const user = await getUser(token);
-                setFavorites(user.favorites);
-                setUser(user);
-                setLoading(false);
-            } catch (error) {
-                console.log(error);
-                setError(error);
-            }
+        function getFavorites() {
+            const user = JSON.parse(localStorage.getItem("user")) || null;
+            setFavorites(user.favorites);
         }
-        getFavorites(token);
-    }, [token]);
+        getFavorites();
+    }, []);
+
+    function handleFavChange(favorites) {
+        setFavorites(favorites);
+    }
 
     if (!token) {
         return navigate("/login-redirect");
-    }
-    if (error) {
-        return <ErrorComponent error={error} />;
-    }
-    if (loading) {
-        return <Loading />;
-    }
-
-    function handleEmptyFavorites(boolean) {
-        if (boolean) setFavorites([]);
     }
 
     return (
@@ -48,15 +29,17 @@ function FavoriteRecipes() {
             {favorites.length > 0 ? (
                 <div className="flex flex-col items-center">
                     <div>
-                         <h1 className="text-6xl font-[Pacifico] text-[#3a4e15] py-10">Your Favorites</h1>
+                        <h1 className="text-6xl font-[Pacifico] text-[#3a4e15] py-10">
+                            Your Favorites
+                        </h1>
                     </div>
                     <div className="flex flex-wrap w-3/4 justify-center gap-5 pb-10">
                         {favorites.map((favorite) => (
                             <RecipeCard
+                                onFavChange={handleFavChange}
                                 key={favorite._id}
                                 favorites={favorites}
                                 recipe={favorite}
-                                onEmpty={handleEmptyFavorites}
                                 onClick={() =>
                                     navigate(
                                         `/categories/${favorite.strCategory}/${favorite.webID}`
@@ -70,12 +53,8 @@ function FavoriteRecipes() {
                 <div className="flex flex-col flex-wrap items-center gap-10 py-20">
                     <div className="flex flex-col w-2/5 p-5 bg-white border border-[#dfdfdf] rounded-xl">
                         <div className="text-center">
-                            <h1 className="text-3xl font-[Pacifico] text-[#3a4e15]">
-                                Favorites
-                            </h1>
-                            <h2 className="text-2xl text-center my-10">
-                                You have no favorites!
-                            </h2>
+                            <h1 className="text-3xl font-[Pacifico] text-[#3a4e15]">Favorites</h1>
+                            <h2 className="text-2xl text-center my-10">You have no favorites!</h2>
                         </div>
                         <button
                             onClick={() => navigate("/")}

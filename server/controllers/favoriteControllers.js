@@ -17,7 +17,7 @@ export const postFavorite = async (req, res) => {
             req.params.id,
             { $addToSet: { favorites: favorite._id } },
             { new: true }
-        );
+        ).populate("favorites");
         return await res.json(updatedUser);
     } catch (error) {
         console.log(error);
@@ -33,7 +33,7 @@ export const deleteFavorite = async (req, res) => {
             req.params.id,
             { $pull: { favorites: favorite._id } },
             { new: true }
-        );
+        ).populate("favorites");
         return await res.json(updatedUser);
     } catch (error) {
         console.log(error);

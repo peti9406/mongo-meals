@@ -6,13 +6,13 @@ import Loading from "./Loading";
 import ErrorComponent from "./ErrorComponent";
 
 function FilteredCategory() {
-
     const { category } = useParams();
     const navigate = useNavigate();
 
     const [recipes, setRecipes] = useState([]);
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [favorites, setFavorites] = useState([]);
 
     useEffect(() => {
         const getRecipesByCategory = async () => {
@@ -28,8 +28,13 @@ function FilteredCategory() {
                 setError(error);
             }
         };
+        const getUserFavorites = () => {
+            const user = JSON.parse(localStorage.getItem("user")) || null;
+            setFavorites(user.favorites);
+        };
 
         getRecipesByCategory();
+        getUserFavorites();
     }, [category]);
 
     if (error) {
@@ -48,6 +53,7 @@ function FilteredCategory() {
                 {recipes.map((recipe) => {
                     return (
                         <RecipeCard
+                            favorites={favorites}
                             recipe={recipe}
                             key={recipe.idMeal}
                             onClick={() => navigate(`/categories/${category}/${recipe.idMeal}`)}
