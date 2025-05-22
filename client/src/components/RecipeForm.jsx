@@ -110,7 +110,7 @@ export default function RecipeForm() {
                     </div>
                 </div>
             ) : (
-                <div className="flex flex-wrap justify-center gap-10 py-20 bg-[rgba(247,246,241,255)]">
+                <div className="flex flex-wrap justify-center gap-10 py-20">
                     <form
                         className="flex flex-col p-5 bg-white border border-[#dfdfdf] rounded-xl"
                         onSubmit={handleSubmit}

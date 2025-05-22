@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 
 function Navbar() {
     const navigate = useNavigate();
+    const location = useLocation();
+    const [search, setSearch] = useState("");
 
     const token = localStorage.getItem("token");
     const isAuthenticated = token && token.trim() !== "";
@@ -12,9 +14,6 @@ function Navbar() {
         localStorage.clear("token");
         navigate("/logout");
     }
-
-    const location = useLocation();
-    const [search, setSearch] = useState("");
 
     useEffect(() => {
         if (location.pathname !== "/search") {
