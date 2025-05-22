@@ -35,7 +35,7 @@ export default function SelectDropDown({ name, onChange, defaultValue }) {
                 className="bg-white border border-[#dfdfdf] rounded-xl pl-2"
                 defaultValue={defaultValue}
             >
-                <option value="" disabled>
+                <option value="" hidden>
                     Select a Category!
                 </option>
                 {categories.map((category) => (
