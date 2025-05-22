@@ -1,43 +1,49 @@
-import {useState, useEffect} from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { getSearchedRecipes } from "../../utils/mealCRUDMethods";
 import RecipeCard from "./RecipeCard";
-
+import { getUser } from "../../utils/UserCRUDMethods";
 
 function RecipeList() {
-
-    const location = useLocation();
+    const [searchParams] = useSearchParams();
+    const searchTerm = searchParams.get("searchText") || "";
     const navigate = useNavigate();
-    const searchTerm = location.state?.searchTerm || "";
     const [recipes, setRecipes] = useState([]);
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
         if (!searchTerm) return;
 
-        async function getRecipes(search) {
+        async function fetchData() {
             try {
-                const searchedRecipes = await getSearchedRecipes(search);
+                const [searchedRecipes, userData] = await Promise.all([
+                    getSearchedRecipes(searchTerm),
+                    getUser(localStorage.getItem("token")),
+                ]);
                 setRecipes(searchedRecipes);
-            } catch (error) {
-                console.log(error);
+                setUser(userData);
+            } catch (err) {
+                console.error(err);
             }
         }
-        getRecipes(searchTerm);
-    }, [searchTerm]);
 
+        fetchData();
+    }, [searchTerm]);
 
     return (
         <div className="flex flex-col items-center">
             <div className="flex flex-wrap w-3/4 justify-center gap-5 py-10">
-                {recipes.map((recipe) => {
-                    return (
-                        <RecipeCard
-                            recipe={recipe}
-                            key={recipe.idMeal}
-                            onClick={() => navigate(`/categories/${recipe.strCategory}/${recipe._id}`)}
-                        />
-                    );
-                })}
+                {recipes.map((recipe) => (
+                    <RecipeCard
+                        recipe={recipe}
+                        key={recipe.idMeal}
+                        onClick={() =>
+                            navigate(`/categories/${recipe.strCategory}/${recipe._id}`)
+                        }
+                        user={user}
+                        favorites={user?.favorites || []}
+                    />
+                ))}
             </div>
         </div>
     );
