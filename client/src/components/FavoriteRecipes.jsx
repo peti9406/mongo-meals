@@ -10,18 +10,18 @@ function FavoriteRecipes() {
 
     useEffect(() => {
         function getFavorites() {
-            const user = JSON.parse(localStorage.getItem("user")) || null;
-            setFavorites(user.favorites);
+            if (token) {
+                const user = JSON.parse(localStorage.getItem("user")) || null;
+                setFavorites(user.favorites);
+            } else {
+                navigate("/login-redirect");
+            }
         }
         getFavorites();
-    }, []);
+    }, [token, navigate]);
 
     function handleFavChange(favorites) {
         setFavorites(favorites);
-    }
-
-    if (!token) {
-        return navigate("/login-redirect");
     }
 
     return (
