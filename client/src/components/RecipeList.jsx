@@ -16,12 +16,9 @@ function RecipeList() {
 
         async function fetchData() {
             try {
-                const [searchedRecipes, userData] = await Promise.all([
-                    getSearchedRecipes(searchTerm),
-                    getUser(localStorage.getItem("token")),
-                ]);
+                const searchedRecipes = await getSearchedRecipes(searchTerm);
                 setRecipes(searchedRecipes);
-                setUser(userData);
+                
             } catch (err) {
                 console.error(err);
             }
