@@ -18,7 +18,7 @@ function RecipeList() {
             try {
                 const searchedRecipes = await getSearchedRecipes(searchTerm);
                 setRecipes(searchedRecipes);
-                
+
             } catch (err) {
                 console.error(err);
             }

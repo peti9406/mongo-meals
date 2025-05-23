@@ -30,7 +30,11 @@ function FilteredCategory() {
         };
         const getUserFavorites = () => {
             const user = JSON.parse(localStorage.getItem("user")) || null;
-            setFavorites(user.favorites);
+
+            if (user) {
+                setFavorites(user.favorites);
+            }
+            
         };
 
         getRecipesByCategory();
