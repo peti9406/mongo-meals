@@ -35,7 +35,7 @@ function RecipeList() {
                         recipe={recipe}
                         key={recipe.idMeal}
                         onClick={() =>
-                            navigate(`/categories/${recipe.strCategory}/${recipe._id}`)
+                            navigate(`/categories/${recipe.strCategory}/${recipe.webID}`)
                         }
                         user={user}
                         favorites={user?.favorites || []}

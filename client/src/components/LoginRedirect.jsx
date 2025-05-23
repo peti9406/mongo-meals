@@ -13,7 +13,7 @@ export default function LoginRedirect() {
                 />
             </div>
             <h2 className="mt-10 mb-4 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
-                To create your own recipes you need to be logged in!
+                To use this feature you need to be logged in!
             </h2>
             <button type="button" onClick={() => navigate("/login")}>
                 Click here to log in
