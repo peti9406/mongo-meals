@@ -5,8 +5,7 @@ import ErrorComponent from "./ErrorComponent.jsx";
 import SelectDropDown from "./SelectDropDown.jsx";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { getUser, updateUser } from "../../utils/UserCRUDMethods.js";
-import Loading from "./Loading.jsx";
+import { updateUser } from "../../utils/UserCRUDMethods.js";
 
 export default function RecipeForm() {
     const navigate = useNavigate();
@@ -16,29 +15,20 @@ export default function RecipeForm() {
     const [ingredientInputs, setIngredientInputs] = useState(["strIngredient1", "strMeasure1"]);
     const [error, setError] = useState(null);
     const [user, setUser] = useState({});
-    const [loading, setLoading] = useState(true);
 
     const token = localStorage.getItem("token") || null;
 
     useEffect(() => {
-        async function getData() {
-            try {
-                const data = await getUser(token);
-                setUser(data);
-                setLoading(false);
-            } catch (error) {
-                setError(error);
+        function getUser() {
+            if (token) {
+                const user = JSON.parse(localStorage.getItem("user")) || null;
+                setUser(user);
+            } else {
+                navigate("/login-redirect");
             }
         }
-        getData();
-    }, [user, token]);
-
-    if (!token) {
-        return navigate("/login-redirect");
-    }
-    if (loading) {
-        return <Loading />;
-    }
+        getUser();
+    }, [token, navigate]);
 
     const inputs = [
         "strMeal",

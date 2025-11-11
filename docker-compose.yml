@@ -1,0 +1,44 @@
+services:
+    mongo:
+        image: mongo:6.0
+        container_name: mongo
+        restart: unless-stopped
+        ports:
+            - "27017:27017"
+        volumes:
+            - mongo-data:/data/db
+
+    server:
+        build: ./server
+        container_name: mongomeals_server
+        restart: unless-stopped
+        env_file: ./server/.env
+        depends_on:
+            - mongo
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./server:/app
+            - /app/node_modules # host node_modules separate
+        dns:
+            - 8.8.8.8
+            - 1.1.1.1
+
+    client:
+        build: ./client
+        container_name: mongomeals_client
+        restart: unless-stopped
+        ports:
+            - "5173:5173"
+        environment:
+            - CHOKIDAR_USEPOLLING=true # WSL2 HMR / Rollup fix
+        stdin_open: true
+        tty: true
+        depends_on:
+            - server
+        volumes:
+            - ./client:/app
+            - /app/node_modules # node_modules in container
+
+volumes:
+    mongo-data:

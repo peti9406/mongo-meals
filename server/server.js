@@ -8,11 +8,11 @@ import dotenv from "dotenv";
 
 import User from "./models/User.js";
 
-mongoose.connect("mongodb+srv://ptorok0694:mongomeals@freestyle.du5fd3t.mongodb.net/freestyle");
+mongoose.connect(process.env.MONGO_URI);
 
 dotenv.config();
 const app = express();
-const port = 3000;
+const port = process.env.PORT;
 
 app.use(express.json());
 app.use("/api/users", userRouter);

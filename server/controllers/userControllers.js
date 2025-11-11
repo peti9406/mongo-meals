@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 const SECRET_KEY = process.env.JWT_SECRET;
+
 if (!SECRET_KEY) {
     throw new Error("Missing JWT_SECRET in environment variables.");
 }
