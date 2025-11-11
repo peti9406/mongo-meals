@@ -5,7 +5,7 @@ import ErrorComponent from "./ErrorComponent.jsx";
 import Loading from "./Loading.jsx";
 import { handleRecipeDelete, getRecipes } from "../../utils/mealCRUDMethods.js";
 import { useNavigate } from "react-router-dom";
-import { deleteUserRecipe, getUser } from "../../utils/UserCRUDMethods.js";
+import { deleteUserRecipe } from "../../utils/UserCRUDMethods.js";
 
 export default function MyRecipes() {
     const navigate = useNavigate();
@@ -20,26 +20,27 @@ export default function MyRecipes() {
     useEffect(() => {
         async function getMyRecipes() {
             try {
-                const userData = await getUser(token);
-                const recipes = await getRecipes(userData._id);
-                setUser(userData);
-                setMyRecipes(recipes);
-                setLoading(false);
+                if (token) {
+                    const user = JSON.parse(localStorage.getItem("user")) || null;
+                    const recipes = await getRecipes(user._id);
+                    setUser(user);
+                    setMyRecipes(recipes);
+                    setLoading(false);
+                } else {
+                    navigate("/login-redirect");
+                }
             } catch (error) {
                 setError(error);
             }
         }
         getMyRecipes();
-    }, [myRecipes, token]);
+    }, [myRecipes, token, navigate, user]);
 
     async function handleDelete(recipe) {
         handleRecipeDelete(recipe);
         deleteUserRecipe(user._id, recipe._id);
     }
 
-    if (!token) {
-        return navigate("/login-redirect");
-    }
     if (error) {
         return <ErrorComponent error={error} />;
     }

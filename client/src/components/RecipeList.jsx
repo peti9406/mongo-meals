@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { getSearchedRecipes } from "../../utils/mealCRUDMethods";
 import RecipeCard from "./RecipeCard";
-import { getUser } from "../../utils/UserCRUDMethods";
 
 function RecipeList() {
     const [searchParams] = useSearchParams();
@@ -18,7 +17,6 @@ function RecipeList() {
             try {
                 const searchedRecipes = await getSearchedRecipes(searchTerm);
                 setRecipes(searchedRecipes);
-
             } catch (err) {
                 console.error(err);
             }
@@ -33,7 +31,7 @@ function RecipeList() {
                 {recipes.map((recipe) => (
                     <RecipeCard
                         recipe={recipe}
-                        key={recipe.idMeal}
+                        key={recipe.webID}
                         onClick={() =>
                             navigate(`/categories/${recipe.strCategory}/${recipe.webID}`)
                         }

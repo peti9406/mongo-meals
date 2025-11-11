@@ -1,7 +1,6 @@
-import User from "../models/User.js";
-import Meal from "../models/Meal.js";
-import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import Meal from "../models/Meal.js";
+import User from "../models/User.js";
 
 dotenv.config();
 const SECRET_KEY = process.env.JWT_SECRET;
