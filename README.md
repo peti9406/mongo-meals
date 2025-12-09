@@ -164,8 +164,8 @@ Under work!
 
 ## Contact
 
--   Bóbita Fábiánné Pallagi - email@email_client.com
--   Botond Brindza - email@email_client.com
+-   Bóbita Fábiánné Pallagi
+-   Botond Brindza
 -   Péter Török - p.torok0694@gmail.com
 
 Project Link: [https://github.com/CodecoolGlobal/freestyle-mern-project-2-react-BrindzaB](https://github.com/CodecoolGlobal/freestyle-mern-project-2-react-BrindzaB)
