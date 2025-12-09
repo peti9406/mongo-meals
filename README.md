@@ -168,7 +168,7 @@ Under work!
 -   Botond Brindza
 -   Péter Török - p.torok0694@gmail.com
 
-Project Link: [https://github.com/CodecoolGlobal/freestyle-mern-project-2-react-BrindzaB](https://github.com/CodecoolGlobal/freestyle-mern-project-2-react-BrindzaB)
+Project Link: https://github.com/peti9406/mongo-meals
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
