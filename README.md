@@ -1,24 +1,27 @@
 <!-- README TOP -->
 <div id="readme-top"></div>
 
+[![Contributors][contributors-shield]][contributors-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
+
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/CodecoolGlobal/freestyle-mern-project-2-react-BrindzaB">
     <img src="/client/src/assets/MongoMealsLogo.png" alt="Logo" width="80" height="80">
-  </a>
 
 <h3 align="center">MongoMeals</h3>
 
   <p align="center">
     Recipe application.
     <br />
-    <a href="https://github.com/CodecoolGlobal/freestyle-mern-project-2-react-BrindzaB"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/peti9406/mongo-meals"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/CodecoolGlobal/freestyle-mern-project-2-react-BrindzaB/issues/new?labels=bug">Report Bug</a>
+    <a href="https://github.com/peti9406/mongo-meals/issues/new?labels=bug">Report Bug</a>
     &middot;
-    <a href="https://github.com/CodecoolGlobal/freestyle-mern-project-2-react-BrindzaB/issues/new?labels=enhancement">Request Feature</a>
+    <a href="https://github.com/peti9406/mongo-meals/issues/new?labels=enhancement">Request Feature</a>
   </p>
 </div>
 
@@ -48,16 +51,12 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-Under work!
+MongoMeals is an interactive platform designed to help users discover, create, and organize recipes with ease. You can browse a wide variety of dishes complete with detailed descriptions, step-by-step instructions, and photos — and for some recipes, even watch helpful video guides. In addition to exploring new ideas, you can also create and store your own recipes, keeping everything in one place. If you find something you love, you can add it to your favorites for quick access anytime.
 
 Core Features:
-
--
--
--
--
+* Browse Recipes
+* Create New Recipes
+* Add to favorite
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -176,18 +175,14 @@ Project Link: [https://github.com/CodecoolGlobal/freestyle-mern-project-2-react-
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/github_username/repo_name.svg?style=for-the-badge
-[contributors-url]: https://github.com/CodecoolGlobal/el-proyecte-grande-production-general-peti9406/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/github_username/repo_name.svg?style=for-the-badge
-[forks-url]: https://github.com/CodecoolGlobal/el-proyecte-grande-production-general-peti9406/forks
-[stars-shield]: https://img.shields.io/github/stars/github_username/repo_name.svg?style=for-the-badge
-[stars-url]: https://github.com/CodecoolGlobal/el-proyecte-grande-production-general-peti9406/stargazers
-[issues-shield]: https://img.shields.io/github/issues/github_username/repo_name.svg?style=for-the-badge
-[issues-url]: https://github.com/github_username/repo_name/issues
-[license-shield]: https://img.shields.io/github/license/github_username/repo_name.svg?style=for-the-badge
-[license-url]: https://github.com/github_username/repo_name/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/peti9406/mongo-meals.svg?style=for-the-badge
+[contributors-url]: https://github.com/peti9406/mongo-meals/graphs/contributors
+[stars-shield]: https://img.shields.io/github/stars/peti9406/mongo-meals.svg?style=for-the-badge
+[stars-url]: https://github.com/peti9406/mongo-meals/stargazers
+[issues-shield]: https://img.shields.io/github/issues/peti9406/mongo-meals.svg?style=for-the-badge
+[issues-url]: https://github.com/peti9406/mongo-meals/issues
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/linkedin_username
+[linkedin-url]: https://www.linkedin.com/in/p%C3%A9ter-t%C3%B6r%C3%B6k-95372315a/
 [product-screenshot]: public/images/planner-bg.jpg
 
 <!-- Shields.io badges. You can a comprehensive list with many more badges at: https://github.com/inttter/md-badges -->
