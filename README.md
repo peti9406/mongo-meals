@@ -16,8 +16,6 @@
   <p align="center">
     Recipe application.
     <br />
-    <a href="https://github.com/peti9406/mongo-meals"><strong>Explore the docs »</strong></a>
-    <br />
     <br />
     <a href="https://github.com/peti9406/mongo-meals/issues/new?labels=bug">Report Bug</a>
     &middot;
@@ -42,7 +40,7 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
+    <li><a href="#screenshots">Screenshots</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
@@ -54,20 +52,21 @@
 MongoMeals is an interactive platform designed to help users discover, create, and organize recipes with ease. You can browse a wide variety of dishes complete with detailed descriptions, step-by-step instructions, and photos — and for some recipes, even watch helpful video guides. In addition to exploring new ideas, you can also create and store your own recipes, keeping everything in one place. If you find something you love, you can add it to your favorites for quick access anytime.
 
 Core Features:
-* Browse Recipes
-* Create New Recipes
-* Add to favorite
+
+- Browse Recipes
+- Create New Recipes
+- Add to favorite
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
 
--   [![JavaScript][Javascript.com]][Javascript-url]
--   [![MongoDB][Mongodb.com]][Mongodb-url]
--   [![Exrpess.js][Expressjs.com]][Expressjs-url]
--   [![React][React.com]][React-url]
--   [![Node.js][Nodejs.com]][Nodejs-url]
--   [![Tailwind][Tailwind.com]][Tailwind-url]
+- [![JavaScript][Javascript.com]][Javascript-url]
+- [![MongoDB][Mongodb.com]][Mongodb-url]
+- [![Exrpess.js][Expressjs.com]][Expressjs-url]
+- [![React][React.com]][React-url]
+- [![Node.js][Nodejs.com]][Nodejs-url]
+- [![Tailwind][Tailwind.com]][Tailwind-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -83,14 +82,14 @@ Currently, this is only a test environment.
 
 For the project to run locally on your computer, you need:
 
--   Node.js >= 18
--   npm or yarn (for installing dependencies)
--   MongoDB
+- Node.js >= 18
+- npm or yarn (for installing dependencies)
+- MongoDB
 
 Or, if you prefer to run it using Docker:
 
--   Docker Desktop (Windows / macOS)
--   Docker Engine (Linux)
+- Docker Desktop (Windows / macOS)
+- Docker Engine (Linux)
 
 ### Installation
 
@@ -134,7 +133,6 @@ Or, if you prefer to run it using Docker:
 4. **Run the application**
 
     Open **two terminals**:
-
     - **Server**
         ```bash
         cd server
@@ -147,16 +145,21 @@ Or, if you prefer to run it using Docker:
         ```
 
 5. **Open the application in your browser**
-
     - Frontend: [http://localhost:5173](http://localhost:5173)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- USAGE EXAMPLES -->
+<!-- Screenshots -->
 
-## Usage
+## Screenshots
 
-Under work!
+#### Home Page
+
+![home](./screenshots/home.png)
+
+#### Favorites
+
+![favorites](./screenshots/favorites.png)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -164,9 +167,9 @@ Under work!
 
 ## Contact
 
--   Bóbita Fábiánné Pallagi
--   Botond Brindza
--   Péter Török - p.torok0694@gmail.com
+- Bóbita Fábiánné Pallagi
+- Botond Brindza
+- Péter Török - p.torok0694@gmail.com
 
 Project Link: https://github.com/peti9406/mongo-meals
 
