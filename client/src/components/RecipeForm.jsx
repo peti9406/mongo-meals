@@ -105,11 +105,9 @@ export default function RecipeForm() {
                         className="flex flex-col p-5 bg-white border border-[#dfdfdf] rounded-xl"
                         onSubmit={handleSubmit}
                     >
-                        <div className="text-center pb-4">
-                            <h1 className="text-3xl font-[Pacifico] text-[#3a4e15]">
-                                Create a Recipe
-                            </h1>
-                        </div>
+                        <h1 className="text-center pb-4 text-3xl font-[Pacifico] text-[#3a4e15]">
+                            Create a Recipe
+                        </h1>
                         <div className="flex flex-row items-start gap-4">
                             <div>
                                 {inputs.map((field) =>
@@ -127,10 +125,10 @@ export default function RecipeForm() {
                                             name={field}
                                             value={meal[field] ?? ""}
                                         />
-                                    )
+                                    ),
                                 )}
                             </div>
-                            <div>
+                            <div className="max-h-[30vh] overflow-y-auto">
                                 {ingredientInputs.map((field) => (
                                     <InputField
                                         key={field}
